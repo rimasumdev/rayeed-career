@@ -7,7 +7,7 @@ const Nav = () => {
   ];
   return (
     <header className="py-2 border-b border-gray-200">
-      <div className="container mx-auto ">
+      <div className="container mx-auto">
         <div className="flex justify-between items-center ">
           <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -43,7 +43,9 @@ const Nav = () => {
                   ))}
                 </ul>
               </div>
-              <a className="btn btn-ghost text-xl">Rayeed Career</a>
+              <a className="text-xl cursor-pointer font-bold uppercase">
+                Rayeed Career
+              </a>
             </div>
             <div className="navbar-center hidden lg:flex">
               <ul className="menu menu-horizontal px-1 space-x-5">
