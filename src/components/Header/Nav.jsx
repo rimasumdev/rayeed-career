@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const Nav = () => {
   const navItems = [
     { name: "Statistics", path: "statistics" },
@@ -43,9 +43,12 @@ const Nav = () => {
                   ))}
                 </ul>
               </div>
-              <a className="text-xl cursor-pointer font-bold uppercase">
+              <Link
+                to="/"
+                className="text-sm md:text-xl cursor-pointer font-bold uppercase"
+              >
                 Rayeed Career
-              </a>
+              </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
               <ul className="menu menu-horizontal px-1 space-x-5">
