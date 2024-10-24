@@ -2,14 +2,15 @@ import { Link, NavLink } from "react-router-dom";
 const Nav = () => {
   const navItems = [
     { name: "Statistics", path: "statistics" },
+    { name: "All Jobs", path: "/" },
     { name: "Applied Jobs", path: "applied-jobs" },
     { name: "Blog", path: "blog" },
   ];
   return (
-    <header className="py-2 border-b border-gray-200">
+    <header className="py-2 border-b bg-violet-50">
       <div className="container mx-auto">
         <div className="flex justify-between items-center ">
-          <div className="navbar bg-base-100">
+          <div className="navbar">
             <div className="navbar-start">
               <div className="dropdown">
                 <div
@@ -45,7 +46,7 @@ const Nav = () => {
               </div>
               <Link
                 to="/"
-                className="text-sm md:text-xl cursor-pointer font-bold uppercase"
+                className="text-sm md:text-3xl cursor-pointer font-bold uppercase"
               >
                 Rayeed Career
               </Link>
@@ -60,9 +61,12 @@ const Nav = () => {
               </ul>
             </div>
             <div className="navbar-end">
-              <a className="btn bg-gradient-to-r from-[#7E90FE] to-[#9873FF] text-white">
+              <Link
+                to="/applied-jobs"
+                className="btn bg-gradient-to-r from-[#7E90FE] to-[#9873FF] text-white"
+              >
                 Start Applying
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,11 +1,13 @@
 import Hero from "../Hero/Hero";
+import JobCategoryList from "../JobCategoryList/JobCategoryList";
+import FeaturedJobs from "../FeaturedJobs/FeaturedJobs";
 const Home = () => {
   return (
-    <section>
-      <div>
-        <Hero />
-      </div>
-    </section>
+    <>
+      <Hero />
+      <JobCategoryList />
+      <FeaturedJobs />
+    </>
   );
 };
 
