@@ -1,36 +1,43 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
-import { useLoaderData, Link } from "react-router-dom";
 import { getFromLocalStorage } from "../../utility/LocalStorage";
 import { CiLocationOn, CiDollar } from "react-icons/ci";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const AppliedJobs = () => {
-  const totalJobs = useLoaderData();
+  const [totalJobs, setTotalJobs] = useState([]);
   const [appliedJobs, setAppliedJobs] = useState([]);
-  const [filter, setFilter] = useState("All");
+  const [displayFilter, setDisplayFilter] = useState("All");
   const [isFiltered, setIsFiltered] = useState(false);
 
   useEffect(() => {
-    const getAppliedJobs = getFromLocalStorage();
-    const totalAppliedJobs = totalJobs.filter((job) =>
-      getAppliedJobs.includes(job.id)
-    );
-    setAppliedJobs(totalAppliedJobs);
-  }, [totalJobs]); // Only depend on totalJobs
+    fetch("jobs.json")
+      .then((res) => res.json())
+      .then((data) => setTotalJobs(data));
+  }, []);
+  useEffect(() => {
+    const storedAppliedJobs = getFromLocalStorage();
+    if (totalJobs.length > 0) {
+      const totalAppliedJobs = totalJobs.filter((job) =>
+        storedAppliedJobs.includes(job.id)
+      );
+      setAppliedJobs(totalAppliedJobs);
+    }
+  }, [totalJobs]);
 
   const handleFilter = (e) => {
-    setFilter(e.target.innerText.toLowerCase());
+    setDisplayFilter(e.target.innerText.toLowerCase());
     setIsFiltered(true);
   };
 
   const filteredJobs = useMemo(() => {
-    if (filter === "all") {
+    if (displayFilter === "all") {
       return appliedJobs;
     }
     return appliedJobs.filter(
-      (job) => job.remote_or_onsite.toLowerCase() === filter
+      (job) => job.remote_or_onsite.toLowerCase() === displayFilter
     );
-  }, [appliedJobs, filter]);
+  }, [appliedJobs, displayFilter]);
 
   const jobsToDisplay = isFiltered ? filteredJobs : appliedJobs;
 
