@@ -1,15 +1,33 @@
 import { useLoaderData, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { addToLocalStorage } from "../../utility/LocalStorage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { getFromLocalStorage } from "../../utility/LocalStorage";
 const JobDetails = () => {
   const featuredJobs = useLoaderData();
   // console.log(featuredJobs);
   const { id } = useParams();
   const currentId = parseInt(id);
   const job = featuredJobs.find((job) => job.id === currentId);
+  const [isDuplicate, setIsDuplicate] = useState(false);
+  const [isApplied, setIsApplied] = useState(false);
   // console.log(job, id);
+  useEffect(() => {
+    const storedAppliedJobs = getFromLocalStorage();
+    const isDuplicate = storedAppliedJobs.find((jobID) => jobID === job.id);
+    setIsDuplicate(isDuplicate);
+  }, [isApplied]);
   const handleApplyNow = () => {
     addToLocalStorage(currentId);
+    notify();
+    setIsApplied(!isApplied);
   };
+  const notify = () =>
+    toast(`${isDuplicate ? "Already Applied" : "Job Applied Successfully!"}`, {
+      className: isDuplicate ? "text-red-500" : "text-green-500",
+    });
   return (
     <div className="space-y-8">
       <div className="bg-violet-50 p-10 rounded-lg space-y-3 text-center">
@@ -233,6 +251,7 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={800} />
     </div>
   );
 };
