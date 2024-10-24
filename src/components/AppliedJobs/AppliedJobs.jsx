@@ -8,6 +8,7 @@ const AppliedJobs = () => {
   const totalJobs = useLoaderData();
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [filter, setFilter] = useState("All");
+  const [isFiltered, setIsFiltered] = useState(false);
 
   useEffect(() => {
     const getAppliedJobs = getFromLocalStorage();
@@ -19,6 +20,7 @@ const AppliedJobs = () => {
 
   const handleFilter = (e) => {
     setFilter(e.target.innerText.toLowerCase());
+    setIsFiltered(true);
   };
 
   const filteredJobs = useMemo(() => {
@@ -29,6 +31,8 @@ const AppliedJobs = () => {
       (job) => job.remote_or_onsite.toLowerCase() === filter
     );
   }, [appliedJobs, filter]);
+
+  const jobsToDisplay = isFiltered ? filteredJobs : appliedJobs;
 
   return (
     <div className="space-y-8">
@@ -68,8 +72,8 @@ const AppliedJobs = () => {
             </div>
           </div>
         </div>
-        {filteredJobs.length > 0 ? (
-          filteredJobs.map((job) => (
+        {jobsToDisplay.length > 0 ? (
+          jobsToDisplay.map((job) => (
             <div
               key={job.id}
               className="border border-violet-100 p-5 rounded-lg"
