@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
-import { getFromLocalStorage } from "../../utility/LocalStorage";
 import { useLoaderData, Link } from "react-router-dom";
+import { getFromLocalStorage } from "../../utility/LocalStorage";
 import { CiLocationOn, CiDollar } from "react-icons/ci";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
