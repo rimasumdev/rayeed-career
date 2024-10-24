@@ -7,7 +7,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 const AppliedJobs = () => {
   const totalJobs = useLoaderData();
   const [appliedJobs, setAppliedJobs] = useState([]);
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     const getAppliedJobs = getFromLocalStorage();

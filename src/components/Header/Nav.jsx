@@ -1,11 +1,43 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 const Nav = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const navItems = [
     { name: "Statistics", path: "statistics" },
-    { name: "All Jobs", path: "/" },
+    { name: "All Jobs", path: "/", hash: "#featured-jobs" },
     { name: "Applied Jobs", path: "applied-jobs" },
     { name: "Blog", path: "blog" },
   ];
+
+  useEffect(() => {
+    if (location.pathname === "/" && location.hash === "#featured-jobs") {
+      setTimeout(() => {
+        const element = document.querySelector("#featured-jobs");
+        if (element) {
+          const headerOffset = 100; // Adjust this value based on your header height
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 100); // Small delay to ensure DOM is fully loaded
+    }
+  }, [location]);
+
+  const handleNavClick = (e, item) => {
+    if (item.hash) {
+      e.preventDefault();
+      navigate(item.path + item.hash);
+    }
+  };
+
   return (
     <header className="py-2 border-b bg-violet-50">
       <div className="container mx-auto">
@@ -55,7 +87,12 @@ const Nav = () => {
               <ul className="menu menu-horizontal px-1 space-x-5">
                 {navItems.map((item) => (
                   <li key={item.name}>
-                    <NavLink to={item.path}>{item.name}</NavLink>
+                    <NavLink
+                      to={item.path}
+                      onClick={(e) => handleNavClick(e, item)}
+                    >
+                      {item.name}
+                    </NavLink>
                   </li>
                 ))}
               </ul>

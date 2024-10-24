@@ -11,7 +11,7 @@ const FeaturedJobs = () => {
   const [showAll, setShowAll] = useState(false);
   //   console.log(featuredJobs);
   return (
-    <section className="container mx-auto pb-16 space-y-8">
+    <section id="featured-jobs" className="container mx-auto pb-16 space-y-8">
       <SectionTitleSubTitle
         title="Featured Jobs"
         subTitle="Explore thousands of job opportunities with all the information you need. Its your future"
