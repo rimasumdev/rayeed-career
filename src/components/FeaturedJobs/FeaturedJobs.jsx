@@ -1,6 +1,6 @@
 import SectionTitleSubTitle from "../SectionTitleSubTitle/SectionTitleSubTitle";
-import FeaturedJob from "../FeaturedJob/FeaturedJob";
 import { useState, useEffect } from "react";
+import FeaturedJob from "../FeaturedJob/FeaturedJob";
 const FeaturedJobs = () => {
   const [featuredJobs, setFeaturedJobs] = useState([]);
   useEffect(() => {
